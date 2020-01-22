@@ -1,0 +1,21 @@
+text,c1,c2,c3,c4,correct_choice_Id
+Which code will give us a text area form field?,Field_name = forms.TextAreaField() ,Field_name = forms.CharField(widgets = forms.Textarea),Field_name = forms.TextField(widgets = forms.Textarea) ,None of the above,2
+What are request.GET and request.POST objects?,Python Dictionaries ,Python Lists ,Python Dictionary-Like objects ,None of the above,3
+What happens when url.py file is edited while the development server is still running?,Development server terminates.,The development server automatically restarts.,The development server does nothing.,The web page is automatically reloaded.,2
+Which setting contains the parameter of main-urls file?,ROOT_URLCONF,MAIN_URLCONF,STATIC_URL,MEDIA_URL,1
+Django is based on which framework?,MVC,MVVM,MVT or MTV (Model-View-Template),None of the above,3
+What is the purpose of __init__.py in project directories?,It allows Python to recognise the folder as package. ,It is useless and can be deleted.,It is used to initialise any empty values.,None of the above,1
+Which method is used instead of path() in urls.py to pass in regular expressions as routes?,static() ,re_path(),include(),url() ,4
+What is the value of DEBUG when website is online/ or deployed?,False,True,None,Null,1
+What does {{ name }} this mean in Django Templates?,It will be displayed as name in HTML.,The name will be replaced with values of Python variable.,{{ name }} will be the output.,None of the above,2
+Check in-valid template tag.,{% If %}/ {% else %},{% ifequal %} ,{% while %} - wrong,{% for key in dictionary %},3
+What does {{ forloop.counter }} prints?,It will not print if for loop variable is not defined.,It will count the number of times loop ran.,It prints the integer value of no. of times the loop executed.,None of the above,3
+This template {# #} is used for?,It is comment in template language.,It is used for business logic. ,It will raise an exception.,None of the above,1
+What is request.META in request object?,It is a python dictionary.,It contains all the HTTP Headers associated with a particular request.,It contains the user’s IP address and machine specifications.,All of the above,1
+What kind of non-HTML outputs can Django generate?,.epub Files,Sitemaps (an XML format developed by google),Exe files,Python files,2
+What are request.GET and request.POST objects?,Python Dictionaries,Python Lists,Python Dictionary-Like objects,None of the above,3
+Which code will give us a text area form field?,Field_name = forms.TextAreaField(),Field_name = forms.CharField(widgets = forms.Textarea),Field_name = forms.TextField(widgets = forms.Textarea),None of the above,2
+What does {% include %} does?,It will include another template.,It will include content from another template having the same templates defined.,It is the same as {% extend %}.,None of the above,1
+Which of the following is true for variable names in Python?,unlimited length,all private members must have leading and trailing underscores,underscore and ampersand are the only two special characters allowed,none of the mentioned,1
+Is Python case sensitive when dealing with identifiers?,es,no,machine dependent,none of the mentioned,1
+Which of the following is invalid?,_a = 1,__a = 1,__str__ = 1,none of the mentioned,4

@@ -7,10 +7,10 @@ from django.db import models
 
 class Questions(models.Model):
     text=models.CharField(max_length=500)
-    c1=models.CharField(max_length=400,null=False)
-    c2=models.CharField(max_length=400,null=False)
-    c3=models.CharField(max_length=400,null=False)
-    c4=models.CharField(max_length=400,null=False)
+    c1=models.TextField(max_length=500,null=False)
+    c2=models.TextField(max_length=500,null=False)
+    c3=models.TextField(max_length=500,null=False)
+    c4=models.TextField(max_length=500,null=False)
     correct_choice_id=models.IntegerField(default=1,
                                           validators=[RegexValidator(
                                               regex='^[1-4]$',
@@ -27,6 +27,9 @@ class Exam(models.Model):
 
     answers=models.CharField(max_length=500,default="")
     score = models.FloatField(default=0)
+
+    done=models.BooleanField(default=False)
+
 class ExamQuestion(models.Model):
     exam=models.ForeignKey(Exam,on_delete=models.CASCADE)
     question=models.ForeignKey(Questions,on_delete=models.CASCADE)
