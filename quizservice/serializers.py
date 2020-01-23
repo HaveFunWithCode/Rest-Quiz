@@ -24,9 +24,6 @@ class QuestionSerializerAnswered(serializers.ModelSerializer):
         model=Questions
         fields=('text','c1','c2','c3','c4','correct_choice_id')
 
-
-
-
 class ExamViewSerializer(serializers.ModelSerializer):
 
     # questions=QuestionSerializer(read_only=True,many=True)
@@ -41,5 +38,20 @@ class ExamViewSerializer(serializers.ModelSerializer):
     class Meta:
         model=Exam
         fields=('id','date','done','score','questions')
+
+# ----------------------------------------------------------------------------------------------------
+
+class ExamListSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model=Exam
+        fields = ['url','id','date','done']
+        extra_kwargs={
+            'url':{'view_name':'examdetail','lookup_field':'id'},
+        }
+
+class ExamDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Exam
+        fields = ['id','date','done','score']
 
 

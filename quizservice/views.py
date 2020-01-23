@@ -5,11 +5,16 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from rest_framework import viewsets
 from rest_framework.authtoken.models import Token
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
+
 from .models import Questions,Exam
-from .serializers import ExamViewSerializer
+from .serializers import ExamViewSerializer, ExamListSerializer, ExamDetailSerializer
+
+
 class quizHomeAPIView(APIView):
     permission_classes =[IsAuthenticated]
 
@@ -25,32 +30,53 @@ class quizHomeAPIView(APIView):
 
         return Response({'examid':exam.id})
 
-# class quizAllExamViewSet(viewsets.ViewSet):
-#     permission_classes = [IsAuthenticated]
-#     """ List all Exam For specific User"""
-#     def list(self,request):
-#         queryset=Exam.objects.filter(user=request.user)
-#         serializer=ExamViewSerializer(queryset,many=True)
-#         return serializer.data
-#     def retrieve(self,request,exam_id=None):
-#         exam = Exam.objects.get(id=exam_id)
-#         serializer = ExamViewSerializer(exam)
-#         return Response(serializer.data)
+
+class CustomPagination(PageNumberPagination):
+    page_size = 5
+
+# class quizExamViewSet(ReadOnlyModelViewSet):
+#     queryset = Exam.objects.all()
+#     # pagination_class = CustomPagination
+#     serializers = {
+#         'list': ExamListSerializer,
+#         'retrieve': ExamDetailSerializer
+#     }
+#
+#     def get_serializer_class(self):
+#         return self.serializers.get(self.action)
+# TODO: put permission limit on this view and give permition just to user who have this exam
+class quizExamViewSet(ModelViewSet):
+    # pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
+    serializers = {
+        'list': ExamListSerializer
+    }
+
+    def get_queryset(self):
+        queryset = Exam.objects.filter(user=self.request.user)
+        return queryset
+
+
+    def get_serializer_class(self):
+        return self.serializers.get(self.action)
+
+
 
 
 
 # TODO: put permission limit on this view and give permition just to user who have this exam
 class quizExamAPIView(APIView):
+
     permission_classes = [IsAuthenticated]
 
-    def get(self,request,exam_id=None):
-        exam=Exam.objects.get(id=exam_id)
+    def get(self,request,id=None):
+        exam=Exam.objects.get(id=id)
         serializer=ExamViewSerializer(exam)
         return Response(serializer.data)
 
-   
 
-    def post(self,request,exam_id=None):
+
+    def post(self,request,id=None):
 
         json_obj=json.loads(request.body.decode("utf-8"))
         examid=json_obj['examid']
